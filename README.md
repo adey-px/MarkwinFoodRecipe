@@ -3,10 +3,10 @@
 
 ### Features
 * Summary of features inculde as below:
-- browseable Django Admin interface 
-- browseable swagger API interface
-- nineteen backend API endpoints
-- user authentication & authorisation
+  - browseable Django Admin interface 
+  - browseable swagger API interface
+  - nineteen backend API endpoints
+  - user authentication & authorisation
 
 ### Technologies
 * Python 
