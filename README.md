@@ -9,27 +9,26 @@
   - user authentication & authorisation
 
 ### Technologies
-* Python 
+* Python:
   - programming language
 
-* Django framework
+* Django framework:
   - admin dashboard
   - url mappings
   - object relational mapper (ORM)
 
-* Django REST framework
+* Django REST framework:
   - build REST API endpoints
 
-* Docker
+* Docker:
   - container services
 
-* PostgreSQL
+* PostgreSQL:
   - database engine
 
-* Swagger
-  - browser based user interface
+* Swagger:
   - automated API documentation
-  - view and test API endpoints
+  - browser view & test API endpoints
 
-* GitHub Actions
+* GitHub Actions:
   - automated code testing & linting
