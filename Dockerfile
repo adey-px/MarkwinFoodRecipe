@@ -1,17 +1,21 @@
 FROM python:3.9-alpine3.13
 LABEL maintainer="oreofe-stephen"
 
+# Disable creating pychache file
 ENV PYTHONUNBUFFERED 1
 
+# Copy packages to path to create in docker
 COPY ./package.txt /tmp/package.txt
-# COPY ./package.dev.txt /tmp/package.dev.txt
+COPY ./package.dev.txt /tmp/package.dev.txt
 # COPY ./scripts /scripts
 COPY ./appzone /appzone
 
-WORKDIR /app
+# Set working dir & port
+WORKDIR /appzone
 EXPOSE 8000
 
-# ARG DEV=false
+# Set default DEV value, turns true in docker-compose
+ARG DEV=false
 
 # Note: first creation of .venv before pip install
 # creation of user1, total access for base user only 
@@ -21,9 +25,9 @@ RUN python -m venv /.venv && \
     # apk add --update --no-cache --virtual .tmp-build-deps \
     #     build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
     /.venv/bin/pip install -r /tmp/package.txt && \
-    # if [ $DEV = "true" ]; \
-    #     then /py/bin/pip install -r /tmp/package.dev.txt ; \
-    # fi && \
+    if [ $DEV = "true" ]; \
+        then /.venv/bin/pip install -r /tmp/package.dev.txt ; \
+    fi && \
     rm -rf /tmp && \
     # apk del .tmp-build-deps && \
     adduser \
