@@ -1,0 +1,25 @@
+---
+name: Checks
+
+# Set github actions to run on push code changes
+on: [push]
+
+# Set job to run named test-lint, with four steps as below
+# step 1 login to dockerhub, 2 checkout, 3 run test, 4 run linting
+# Note secrets dockerhub user & token are set in project repo settings
+jobs:
+  test-lint:
+    name: Linting & Testing
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Linting
+        run: docker-compose run --rm server sh -c "flake8"
+      - name: Testing
+        run: docker-compose run --rm server sh -c "python manage.py test"
